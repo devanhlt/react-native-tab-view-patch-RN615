@@ -62,8 +62,13 @@ export default function PagerViewAdapter<T extends Route>({
     const index = navigationStateRef.current.routes.findIndex(
       (route: { key: string }) => route.key === key
     );
-
-    pagerRef.current?.setPage(index);
+    
+    if (typeof pagerRef.current?.setPage !== 'function' && typeof pagerRef.current?.getNode === 'function') {      
+      pagerRef.current?.getNode().setPage(index);
+    }
+    else {
+      pagerRef.current?.setPage(index);
+    }
   }, []);
 
   React.useEffect(() => {

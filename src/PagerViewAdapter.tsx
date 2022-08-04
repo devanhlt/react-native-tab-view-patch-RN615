@@ -63,8 +63,8 @@ export default function PagerViewAdapter<T extends Route>({
       (route: { key: string }) => route.key === key
     );
     
-    if (typeof pagerRef.current?.setPage !== 'function' && typeof pagerRef.current?.getNode === 'function') {      
-      pagerRef.current?.getNode().setPage(index);
+    if (typeof pagerRef.current?.setPage !== 'function' && typeof (pagerRef.current as any)?.getNode === 'function') {      
+      (pagerRef.current as any)?.getNode().setPage(index);
     }
     else {
       pagerRef.current?.setPage(index);
